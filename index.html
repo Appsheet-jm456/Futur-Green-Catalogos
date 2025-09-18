@@ -1,160 +1,93 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>COMERCILIZADORA FUTUR GREEN — Catálogo Bolsa Maniguetas</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Catalogo de Bolsas de manigueta. Entregas en Cali 24–48 h. Venta por paca/Millar" />
-  <meta property="og:title" content="COMERCILIZADORA FUTUR GREEN — Catálogo" />
-  <meta property="og:description" content="Bolsas de manigueta. Entregas en Cali 24–48 h." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/og-catalogo.jpg" />
-  <meta name="theme-color" content="#0E9F6E" />
-  <link rel="icon" href="assets/favicon.png" />
+  <meta charset="utf-8">
+  <title>Comercializadora Futur Green — Catálogo Maniguetas</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Catálogo de bolsas de manigueta y precorte. Entrega en Cali 24–48 h. Venta por paca/millar.">
+  <meta property="og:title" content="Comercializadora Futur Green — Catálogo">
+  <meta property="og:description" content="Bolsas de manigueta y precorte. Entregas 24–48 h.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-catalogo.jpg">
+  <meta name="theme-color" content="#0E9F6E">
+  <link rel="icon" href="assets/favicon.png">
   <style>
     :root{
-      --brand:#0E9F6E; --brand-light:#10b574; --dark:#0e1b16; --muted:#6b7280; --bg:#f6f7f8; --card:#fff;
+      --brand:#0E9F6E; --brand2:#10b574; --muted:#6b7280; --bg:#f6f7f8; --card:#fff;
       --radius:16px; --shadow:0 8px 24px rgba(0,0,0,.06); --shadow-lg:0 20px 40px rgba(0,0,0,.1);
-      --gradient:linear-gradient(135deg, #0E9F6E 0%, #10b574 100%);
+      --grad:linear-gradient(135deg,#0E9F6E,#10b574);
     }
-    *{box-sizing:border-box}
-    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:#111; background:var(--bg); line-height:1.6}
-    
-    /* Header mejorado */
-    header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.95); backdrop-filter:blur(10px); box-shadow:var(--shadow)}
-    .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 20px; max-width:1200px; margin:0 auto}
+    *{box-sizing:border-box} html,body{margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:#111; background:var(--bg); line-height:1.6}
+    header{position:sticky; top:0; z-index:10; background:rgba(255,255,255,.95); backdrop-filter:blur(8px); box-shadow:var(--shadow)}
+    .topbar{max-width:1200px; margin:0 auto; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px}
     .brand{display:flex; align-items:center; gap:12px; white-space:nowrap}
-    .logo{width:42px; height:42px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:bold; color:white; font-size:18px}
-    .brand h1{font-size:18px; margin:0; font-weight:700; background:var(--gradient); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+    .logo{width:42px; height:42px; border-radius:12px; background:var(--grad); color:#fff; display:grid; place-items:center; font-weight:800}
+    .brand h1{margin:0; font-size:18px; font-weight:800; background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
     .brand small{display:block; color:var(--muted); font-weight:500; font-size:13px}
-    .contact-info{text-align:right; font-size:13px; color:var(--muted)}
-    .contact-info b{color:var(--brand); font-weight:700}
+    .contact{color:var(--muted); font-size:13px; text-align:right}
+    .contact b{color:var(--brand)}
 
-    /* Hero mejorado */
     .hero{max-width:1200px; margin:24px auto 0; padding:0 20px 24px}
-    .hero .card{background:linear-gradient(135deg,#ffffff 0%, #f9fbfa 100%); border-radius:var(--radius); padding:32px; box-shadow:var(--shadow-lg); border:1px solid rgba(14,159,110,.1)}
-    .hero h2{margin:0 0 8px; font-size:32px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
-    .sub{color:var(--muted); margin:0; font-size:16px; font-weight:500}
+    .hero .card{background:linear-gradient(135deg,#ffffff,#f9fbfa); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow-lg); border:1px solid rgba(14,159,110,.1)}
+    .hero h2{margin:0 0 6px; font-size:28px; font-weight:900; background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+    .sub{margin:0; color:var(--muted); font-weight:500}
 
-    /* Filtros completamente rediseñados */
-    .filters-section{max-width:1200px; margin:0 auto 32px; padding:0 20px}
-    .filters-card{background:white; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); border:1px solid rgba(14,159,110,.08)}
-    .filters-header{margin-bottom:20px; text-align:center}
-    .filters-header h3{margin:0; font-size:18px; font-weight:700; color:var(--dark)}
-    .filters-header p{margin:4px 0 0; color:var(--muted); font-size:14px}
-    
-    .filters{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:16px; margin-bottom:16px}
-    @media (max-width:900px){.filters{grid-template-columns:1fr 1fr; gap:12px}}
+    .filters-wrap{max-width:1200px; margin:0 auto 28px; padding:0 20px}
+    .filters-card{background:#fff; border:1px solid rgba(14,159,110,.08); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+    .filters-head{text-align:center; margin-bottom:12px}
+    .filters-head h3{margin:0; font-size:18px; font-weight:800}
+    .filters-head p{margin:4px 0 0; color:var(--muted); font-size:14px}
+    .filters{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:14px}
+    @media (max-width:900px){.filters{grid-template-columns:1fr 1fr}}
     @media (max-width:600px){.filters{grid-template-columns:1fr}}
-    
-    .filter-group{display:flex; flex-direction:column; gap:6px}
-    .filter-label{font-size:13px; font-weight:600; color:var(--dark); text-transform:uppercase; letter-spacing:.5px}
-    .filters input,.filters select{width:100%; padding:12px 16px; border:2px solid #e5e7eb; border-radius:12px; background:#fff; outline:none; font-size:14px; transition:all .2s ease}
+    .fg{display:flex; flex-direction:column; gap:6px}
+    .lab{font-size:12px; font-weight:700; color:#0e1b16; text-transform:uppercase; letter-spacing:.4px}
+    .filters input,.filters select{padding:12px 14px; border:2px solid #e5e7eb; border-radius:12px; background:#fff; outline:none; font-size:14px}
     .filters input:focus,.filters select:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(14,159,110,.1)}
-    .filters input::placeholder{color:var(--muted)}
-    
-    .filter-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-    .btn-filter{background:var(--gradient); color:#fff; border:none; cursor:pointer; border-radius:12px; font-weight:600; padding:12px 24px; font-size:14px; transition:all .2s ease; text-transform:uppercase; letter-spacing:.5px}
-    .btn-filter:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
-    .btn-filter:disabled{opacity:0.6; cursor:not-allowed; transform:none}
-    .btn-clear{background:white; color:var(--muted); border:2px solid #e5e7eb; cursor:pointer; border-radius:12px; font-weight:600; padding:10px 20px; font-size:14px; transition:all .2s ease}
-    .btn-clear:hover{border-color:var(--brand); color:var(--brand)}
+    .f-actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px}
+    .btn{border:none; cursor:pointer; border-radius:12px; font-weight:700; padding:12px 20px; font-size:14px}
+    .btn.primary{background:var(--grad); color:#fff}
+    .btn.ghost{background:#fff; border:2px solid #e5e7eb; color:var(--muted)}
+    .btn.ghost:hover{border-color:var(--brand); color:var(--brand)}
 
-    /* Grid mejorado */
-    .grid{max-width:1200px; margin:0 auto 32px; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:24px; min-height:200px}
-    
-    /* Cards completamente rediseñadas */
-    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column; transition:all .3s ease; border:1px solid rgba(14,159,110,.05)}
+    .grid{max-width:1200px; margin:0 auto 32px; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:22px; min-height:120px}
+    .card{background:var(--card); border-radius:var(--radius); border:1px solid rgba(14,159,110,.06); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease}
     .card:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg)}
-    
-    .thumb{width:100%; aspect-ratio:1.2/1; object-fit:cover; background:linear-gradient(45deg, #eef3f1, #f5f9f7)}
-    .body{padding:20px; flex:1; display:flex; flex-direction:column}
-    .title{margin:0 0 8px; font-size:18px; font-weight:700; color:var(--dark)}
-    .meta{color:var(--muted); font-size:14px; margin-bottom:12px; line-height:1.4}
-    
-    .price-toggle{margin:12px 0; display:flex; background:#f8f9fa; border-radius:10px; padding:3px; border:1px solid #e9ecef}
-    .price-toggle button{flex:1; padding:8px 12px; border:none; background:transparent; border-radius:7px; font-weight:600; font-size:12px; cursor:pointer; transition:all .2s ease; text-transform:uppercase; letter-spacing:.3px}
-    .price-toggle button.active{background:var(--brand); color:white; box-shadow:0 2px 4px rgba(14,159,110,.2)}
-    
-    .price-display{text-align:center; margin:12px 0}
-    .price{font-weight:800; font-size:22px; color:var(--brand)}
-    .price-unit{font-size:14px; color:var(--muted); font-weight:600; display:block; margin-top:2px}
-    
-    .row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:12px 0}
-    .chip{background:linear-gradient(45deg, #eef7f4, #f0f9f5); color:var(--brand); font-size:12px; padding:6px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:6px; font-weight:700; text-transform:uppercase; letter-spacing:.3px; border:1px solid rgba(14,159,110,.2)}
-    
-    .actions{display:flex; gap:8px; margin-top:auto; padding-top:16px}
-    .btn{flex:1; padding:12px 16px; border-radius:10px; border:2px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:600; font-size:14px; transition:all .2s ease; text-decoration:none; text-align:center; display:inline-flex; align-items:center; justify-content:center; gap:6px}
-    .btn:hover{border-color:var(--brand); color:var(--brand); transform:translateY(-1px)}
-    .btn.primary{background:var(--gradient); color:#fff; border-color:transparent}
-    .btn.primary:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .thumb{width:100%; aspect-ratio:1.25/1; object-fit:cover; background:linear-gradient(45deg,#eef3f1,#f5f9f7)}
+    .body{padding:18px; display:flex; flex-direction:column; gap:10px}
+    .title{margin:0; font-size:18px; font-weight:800}
+    .meta{color:var(--muted); font-size:14px}
+    .price-toggle{display:flex; gap:4px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:10px; padding:3px}
+    .price-toggle button{flex:1; padding:8px; border:none; background:transparent; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer}
+    .price-toggle .on{background:var(--brand); color:#fff}
+    .price{font-weight:900; font-size:22px; color:var(--brand)}
+    .unit{font-size:12px; color:var(--muted); font-weight:700}
+    .row{display:flex; align-items:center; justify-content:space-between}
+    .chip{background:linear-gradient(45deg,#eef7f4,#f0f9f5); color:var(--brand); font-size:12px; padding:6px 12px; border-radius:999px; border:1px solid rgba(14,159,110,.2); font-weight:800}
+    .actions{display:flex; gap:8px}
+    .btn.card{flex:1; background:#fff; border:2px solid #e5e7eb; color:#111}
+    .btn.card:hover{border-color:var(--brand); color:var(--brand)}
+    .btn.cta{flex:1; background:var(--grad); color:#fff}
 
-    /* Modal mejorado */
-    dialog{width:min(900px,95vw); border:none; border-radius:20px; padding:0; box-shadow:var(--shadow-lg); max-height:90vh; overflow:auto}
+    dialog{width:min(900px,95vw); border:none; border-radius:20px; padding:0; box-shadow:var(--shadow-lg)}
     dialog::backdrop{background:rgba(0,0,0,.4); backdrop-filter:blur(4px)}
-    .modal{display:grid; grid-template-columns:1.2fr 1fr; gap:24px; padding:24px; position:relative}
-    @media (max-width:780px){ .modal{grid-template-columns:1fr; gap:20px} }
-    .modal img{width:100%; border-radius:16px; background:linear-gradient(45deg, #eef3f1, #f5f9f7); aspect-ratio:1.1/1; object-fit:cover}
-    .modal h3{margin:0 0 8px; font-size:24px; font-weight:800; color:var(--dark)}
-    .modal-meta{color:var(--muted); font-size:14px; margin-bottom:20px}
-    .kv{margin:8px 0; display:flex; align-items:center; font-size:14px}
-    .kv-label{display:inline-block; min-width:140px; font-weight:700; color:var(--dark)}
-    .kv-value{color:var(--muted)}
-    
-    /* Botón de cerrar mejorado */
-    .modal-close{position:absolute; right:16px; top:16px; background:rgba(255,255,255,.95); border:2px solid #e5e7eb; border-radius:12px; width:40px; height:40px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:bold; color:var(--muted); transition:all .2s ease; backdrop-filter:blur(10px)}
-    .modal-close:hover{background:var(--brand); color:white; border-color:var(--brand); transform:scale(1.05)}
-    
-    .thumbs{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap}
-    .thumbs img{width:70px; height:70px; object-fit:cover; border-radius:12px; border:3px solid transparent; cursor:pointer; transition:all .2s ease}
-    .thumbs img:hover{border-color:rgba(14,159,110,.3)}
-    .thumbs img.active{border-color:var(--brand); transform:scale(1.05)}
+    .modal{display:grid; grid-template-columns:1.2fr 1fr; gap:20px; padding:20px; position:relative}
+    @media (max-width:780px){.modal{grid-template-columns:1fr}}
+    .modal img{width:100%; border-radius:14px; background:linear-gradient(45deg,#eef3f1,#f5f9f7); aspect-ratio:1.1/1; object-fit:cover}
+    .x{position:absolute; right:12px; top:12px; width:40px; height:40px; border-radius:12px; border:2px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:900; color:var(--muted)}
+    .kv{margin:6px 0; font-size:14px}
+    .kv b{display:inline-block; min-width:140px}
+    .thumbs{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap}
+    .thumbs img{width:70px; height:70px; object-fit:cover; border-radius:10px; border:3px solid transparent; cursor:pointer}
+    .thumbs img.on{border-color:var(--brand)}
 
-    /* Pagination mejorada */
-    .pager{max-width:1200px; margin:0 auto 60px; padding:0 20px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap}
-    .pager button{padding:10px 14px; border-radius:12px; border:2px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:600; transition:all .2s ease; min-width:44px}
-    .pager button:hover{border-color:var(--brand); color:var(--brand)}
-    .pager .on{background:var(--gradient); color:#fff; border-color:transparent}
+    .pager{max-width:1200px; margin:0 auto 48px; padding:0 20px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap}
+    .pager button{padding:10px 14px; border-radius:12px; border:2px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:700; min-width:44px}
+    .pager .on{background:var(--grad); color:#fff; border-color:transparent}
 
-    /* Footer mejorado */
-    .footer{text-align:center; color:var(--muted); padding:40px 20px 100px; background:linear-gradient(135deg, #f8fffe 0%, #f0f9f5 100%); margin-top:40px}
-    .footer-content{max-width:600px; margin:0 auto; line-height:1.8}
-    .footer b{color:var(--brand); font-weight:700}
-
-    /* WhatsApp flotante mejorado */
-    .wa{position:fixed; right:24px; bottom:24px; z-index:100; background:#25D366; color:#fff; border:none; border-radius:16px; padding:16px 20px; font-weight:700; box-shadow:var(--shadow-lg); cursor:pointer; transition:all .2s ease; display:flex; align-items:center; gap:8px; font-size:14px}
-    .wa:hover{transform:translateY(-2px); box-shadow:0 12px 24px rgba(37,211,102,.3)}
-    
-    /* Estados especiales */
-    .loading-message, .error-message{
-      text-align:center; padding:40px; border-radius:12px; margin:20px 0;
-    }
-    .loading-message{
-      color:var(--muted); font-size:18px; background:rgba(14,159,110,.05);
-    }
-    .error-message{
-      background:#fee; border:2px solid #fcc; color:#c33; font-weight:600;
-    }
-    .results-count{
-      text-align:center; margin:16px 0; color:var(--muted); font-weight:600;
-    }
-    
-    /* Responsive improvements */
-    @media (max-width:640px){
-      .topbar{flex-direction:column; gap:12px; text-align:center}
-      .hero .card{padding:24px 20px}
-      .hero h2{font-size:24px}
-      .filters{grid-template-columns:1fr; gap:12px}
-      .grid{grid-template-columns:1fr; gap:16px}
-      .modal{padding:16px}
-    }
-
-    /* Loading states */
-    .loading{opacity:.6; pointer-events:none}
-    
-    /* Animations */
-    @keyframes fadeIn{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)}}
-    .card{animation:fadeIn .3s ease-out}
+    .footer{text-align:center; color:var(--muted); padding:40px 20px 100px; background:linear-gradient(135deg,#f8fffe,#f0f9f5)}
+    .wa{position:fixed; right:20px; bottom:20px; z-index:20; background:#25D366; color:#fff; border:none; border-radius:16px; padding:14px 18px; font-weight:800; box-shadow:var(--shadow-lg); cursor:pointer}
   </style>
 </head>
 <body>
@@ -163,546 +96,268 @@
     <div class="brand">
       <div class="logo">FG</div>
       <div>
-        <h1>Comercilizadora Futur Green</h1>
+        <h1>Comercializadora Futur Green</h1>
         <small>El futuro es Circular — Catálogo Bolsa Maniguetas</small>
       </div>
     </div>
-    <div class="contact-info">
+    <div class="contact">
       <div>WhatsApp: (+57) <b id="waText">318 751 41 95</b></div>
-      <div>Cali • Entregas 24-48h</div>
+      <div>Cali • Entregas 24–48 h</div>
     </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="card">
-    <div>
-      <h2>Catálogo de Bolsas de Manigueta</h2>
-      <p class="sub">Venta por paca y millar • Material polietileno de alta calidad • Diversos calibres y colores disponibles • Entrega local garantizada en 24-48 horas • Datos actualizados desde Google Sheets</p>
-    </div>
+    <h2>Catálogo de Bolsas de Manigueta</h2>
+    <p class="sub">Venta por paca y millar • HD/LD • Colores y calibres • Entrega local 24–48 h • Datos desde Google Sheets (CSV)</p>
   </div>
 </section>
 
-<section class="filters-section">
+<section class="filters-wrap">
   <div class="filters-card">
-    <div class="filters-header">
+    <div class="filters-head">
       <h3>Encuentra tu Producto Ideal</h3>
-      <p>Utiliza los filtros para encontrar exactamente lo que necesitas</p>
+      <p>Usa los filtros para buscar por talla, medida, color o familia</p>
     </div>
-    
-    <form class="filters" id="filters" onsubmit="event.preventDefault(); applyFilters();">
-      <div class="filter-group">
-        <label class="filter-label">Buscar Producto</label>
-        <input type="search" id="q" placeholder="T-30, 43x52, precorte 8x12, negro..." />
+    <form class="filters" onsubmit="event.preventDefault(); applyFilters();">
+      <div class="fg">
+        <label class="lab">Buscar</label>
+        <input id="q" type="search" placeholder="T-30, 43x52, precorte 8x12, negro…">
       </div>
-      <div class="filter-group">
-        <label class="filter-label">Familia</label>
-        <select id="familia">
-          <option value="">Todas las familias</option>
-        </select>
+      <div class="fg">
+        <label class="lab">Familia</label>
+        <select id="familia"><option value="">Todas</option></select>
       </div>
-      <div class="filter-group">
-        <label class="filter-label">Color</label>
-        <select id="color">
-          <option value="">Todos los colores</option>
-        </select>
+      <div class="fg">
+        <label class="lab">Color</label>
+        <select id="color"><option value="">Todos</option></select>
       </div>
-      <div class="filter-group">
-        <label class="filter-label">Ordenar</label>
+      <div class="fg">
+        <label class="lab">Ordenar</label>
         <select id="orden">
-          <option value="">Orden original</option>
+          <option value="">Original</option>
           <option value="precioAsc">Precio menor</option>
           <option value="precioDesc">Precio mayor</option>
-          <option value="nombreAsc">Nombre A-Z</option>
+          <option value="nombreAsc">Nombre A–Z</option>
         </select>
       </div>
     </form>
-    
-    <div class="filter-actions">
-      <button class="btn-filter" onclick="applyFilters()">Aplicar Filtros</button>
-      <button class="btn-clear" onclick="clearFilters()">Limpiar</button>
-      <button class="btn-filter" id="refreshBtn" onclick="refreshProducts()">Actualizar Datos</button>
+    <div class="f-actions">
+      <button class="btn primary" onclick="applyFilters()">Aplicar filtros</button>
+      <button class="btn ghost" onclick="clearFilters()">Limpiar</button>
+      <button id="refreshBtn" class="btn primary" onclick="loadProductsFromCSV()">Actualizar datos</button>
     </div>
   </div>
 </section>
 
-<main class="grid" id="grid"></main>
-<div class="pager" id="pager"></div>
+<main id="grid" class="grid"></main>
+<div id="pager" class="pager"></div>
 
 <dialog id="dlg">
-  <button class="modal-close" onclick="dlg.close()">×</button>
-  <div class="modal" id="modalBody"></div>
+  <button class="x" onclick="dlg.close()">×</button>
+  <div id="modalBody" class="modal"></div>
 </dialog>
 
-<button class="wa" id="waFloat">WhatsApp</button>
+<button id="waFloat" class="wa">WhatsApp</button>
 
 <footer class="footer">
-  <div class="footer-content">
-    <strong>COMERCILIZADORA FUTUR GREEN</strong><br/>
-    El futuro es Circular • WhatsApp: (+57) <b>318-751-41-95</b><br/>
-    Cali, Valle del Cauca, Colombia • Entregas 24-48 horas<br/>
-    <small style="margin-top:12px; display:block; opacity:.7">Catálogo de bolsas maniguetas • Calidad garantizada</small>
-  </div>
+  Comercializadora Futur Green — El futuro es Circular<br>
+  WhatsApp: (+57) <b>318-751-41-95</b> · Cali · Entregas 24–48 h
 </footer>
 
 <script>
-  // ====== CONFIG ======
+  // ===== CONFIG =====
   const WHATSAPP_NUMBER = "573187514195";
   const DEFAULT_MSG = encodeURIComponent("¡Hola Futur Green! Quiero cotizar estas referencias:");
   const PAGE_SIZE = 9;
-  // URL de tu Apps Script
-  const SHEETS_API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTiQe0zH55IXOP0C8F4ByoR_GB234S0kYGrehHO-meUgKmOOPiAGUHjJBxR8v6AXrY1t88C3y2RwSaQ/pub?gid=0&single=true&output=csv";
 
-  // ====== VARIABLES GLOBALES ======
-  let PRODUCTS = [];
-  let filtered = [];
-  let page = 1;
-  let priceMode = {};
+  // TU CSV PÚBLICO (Google Sheets → Publicar en la web)
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTiQe0zH55IXOP0C8F4ByoR_GB234S0kYGrehHO-meUgKmOOPiAGUHjJBxR8v6AXrY1t88C3y2RwSaQ/pub?gid=0&single=true&output=csv";
 
-  // ====== UTIL ======
-  const $ = sel => document.querySelector(sel);
-  const $$ = sel => Array.from(document.querySelectorAll(sel));
-  const money = v => v ? v.toLocaleString("es-CO",{style:"currency", currency:"COP", maximumFractionDigits:0}) : "—";
-  const waLink = (text="") => `https://wa.me/${WHATSAPP_NUMBER}?text=${DEFAULT_MSG}%0A${encodeURIComponent(text)}`;
+  // ===== UTIL =====
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  const money = v => v ? v.toLocaleString("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}) : "—";
+  const waLink = (t="") => `https://wa.me/${WHATSAPP_NUMBER}?text=${DEFAULT_MSG}%0A${encodeURIComponent(t)}`;
 
-  // ====== CARGAR PRODUCTOS DESDE GOOGLE SHEETS ======
-  async function loadProductsFromSheets() {
-    try {
-      console.log('Cargando productos desde Google Sheets...');
-      showLoading(true);
-      
-      const response = await fetch(SHEETS_API_URL);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log('Datos recibidos:', data);
-      
-      PRODUCTS = data.filter(product => product.id && product.nombre);
+  let PRODUCTS = [], filtered = [], page = 1, priceMode = {};
+
+  // Parser CSV robusto
+  function parseCSV(text){
+    const rows = [];
+    const re = /(?:^|,)(\"(?:(?:\"\")*[^"]*)*\"|[^,\r\n]*)/g;
+    text.split(/\r?\n/).forEach(line=>{
+      if(!line.trim()) return;
+      const row = [];
+      line.replace(re, (m)=>{
+        let v = m.startsWith(",") ? m.slice(1) : m;
+        v = v.trim();
+        if(v.startsWith('"') && v.endsWith('"')) v = v.slice(1,-1).replace(/""/g,'"');
+        row.push(v);
+        return m;
+      });
+      rows.push(row);
+    });
+    return rows;
+  }
+  const toNum = x => {
+    const s = String(x||"").replace(/[^0-9.,-]/g,"").replace(/\./g,"").replace(",",".");
+    const n = Number(s); return isNaN(n) ? 0 : n;
+  };
+  const toArr = x => String(x||"").split(";").map(s=>s.trim()).filter(Boolean);
+
+  function normProduct(p){
+    return {
+      ...p,
+      precioPaca:   toNum(p.precioPaca),
+      precioMillar: toNum(p.precioMillar),
+      usos:    toArr(p.usos),
+      galeria: toArr(p.galeria)
+    };
+  }
+
+  async function loadProductsFromCSV(){
+    try{
+      $("#grid").innerHTML = '<div class="meta" style="text-align:center">Cargando productos…</div>';
+      const res = await fetch(CSV_URL + "&_cb=" + Date.now(), { cache: "no-store" });
+      const csv = await res.text();
+      const rows = parseCSV(csv);
+      const [headers, ...data] = rows;
+      const items = data
+        .filter(r => r.some(c => c && c.trim()))
+        .map(r => {
+          const obj = {};
+          headers.forEach((h,i)=> obj[(h||"").trim()] = r[i] ?? "");
+          return normProduct(obj);
+        })
+        .filter(p => p.id && p.nombre);
+      PRODUCTS = items;
       filtered = [...PRODUCTS];
-      
-      console.log('Productos cargados:', PRODUCTS.length);
-      
-      // Actualizar filtros dinámicos
-      updateFilterOptions();
-      
-      // Renderizar después de cargar
-      paginate(filtered);
-      showResultsCount();
-      showLoading(false);
-      
-      return PRODUCTS;
-      
-    } catch (error) {
-      console.error('Error cargando productos:', error);
-      showError('Error al cargar productos desde Google Sheets. Usando datos de respaldo.');
-      showLoading(false);
-      
-      // Productos de respaldo
-      PRODUCTS = getBackupProducts();
-      filtered = [...PRODUCTS];
       updateFilterOptions();
       paginate(filtered);
-      showResultsCount();
-      
-      return PRODUCTS;
+    }catch(e){
+      console.error("Error CSV:", e);
+      $("#grid").innerHTML = '<div class="meta" style="text-align:center;color:#c33">No se pudo leer el CSV público.</div>';
     }
   }
 
-  // ====== PRODUCTOS DE RESPALDO ======
-  function getBackupProducts() {
-    return [
-      { 
-        id:"MAN-T20-NG", familia:"Manigueta", nombre:"Manigueta T-20", cm:"30×38", inch:"12×15", 
-        material:"HD", calibre:"12–14", color:"Negro", unidad:"Paca x1000", 
-        precioPaca:3000, precioMillar:30000, 
-        usos:["fruver pequeño","miscelánea","porciones"], 
-        img:"assets/placeholder.jpg", 
-        galeria:["assets/placeholder.jpg"] 
-      }
-    ];
+  function updateFilterOptions(){
+    const famSel = $("#familia"), colSel = $("#color");
+    const fams = [...new Set(PRODUCTS.map(p=>p.familia).filter(Boolean))];
+    famSel.innerHTML = '<option value="">Todas</option>' + fams.map(f=>`<option>${f}</option>`).join("");
+    const cols = [...new Set(PRODUCTS.map(p=>p.color).filter(Boolean))];
+    colSel.innerHTML = '<option value="">Todos</option>' + cols.map(c=>`<option>${c}</option>`).join("");
   }
 
-  // ====== UI HELPERS ======
-  function showLoading(show) {
-    const grid = $("#grid");
-    const existing = $('.loading-message');
-    
-    if (show) {
-      if (!existing) {
-        grid.innerHTML = '<div class="loading-message">⏳ Cargando productos desde Google Sheets...</div>';
-      }
-    } else {
-      if (existing) existing.remove();
-    }
-  }
-
-  function showError(message) {
-    const grid = $("#grid");
-    const error = document.createElement('div');
-    error.className = 'error-message';
-    error.innerHTML = `❌ ${message}`;
-    grid.appendChild(error);
-    
-    setTimeout(() => error.remove(), 8000);
-  }
-
-  function updateFilterOptions() {
-    // Actualizar opciones de familia
-    const familiaSelect = $("#familia");
-    const familias = [...new Set(PRODUCTS.map(p => p.familia))].filter(f => f);
-    familiaSelect.innerHTML = '<option value="">Todas las familias</option>';
-    familias.forEach(familia => {
-      familiaSelect.innerHTML += `<option value="${familia}">${familia}</option>`;
-    });
-
-    // Actualizar opciones de color
-    const colorSelect = $("#color");
-    const colores = [...new Set(PRODUCTS.map(p => p.color))].filter(c => c);
-    colorSelect.innerHTML = '<option value="">Todos los colores</option>';
-    colores.forEach(color => {
-      colorSelect.innerHTML += `<option value="${color}">${color}</option>`;
-    });
-  }
-
-  // ====== REFRESH MANUAL ======
-  async function refreshProducts() {
-    const btn = $("#refreshBtn");
-    btn.disabled = true;
-    btn.textContent = "🔄 Actualizando...";
-    
-    await loadProductsFromSheets();
-    
-    btn.disabled = false;
-    btn.textContent = "🔄 Actualizar Datos";
-  }
-  window.refreshProducts = refreshProducts;
-
-  // ====== RENDER FUNCTIONS ======
   function paginate(list){
     const total = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
     if(page>total) page = total;
     const start = (page-1)*PAGE_SIZE;
-    const slice = list.slice(start, start+PAGE_SIZE);
-    render(slice);
+    render(list.slice(start, start+PAGE_SIZE));
     renderPager(total);
   }
 
-  const grid = $("#grid");
-  function render(products){
-    if (products.length === 0) {
-      grid.innerHTML = '<div class="loading-message">📭 No se encontraron productos con los filtros seleccionados</div>';
-      return;
-    }
-
+  function render(items){
+    const grid = $("#grid");
+    if(!items.length){ grid.innerHTML = '<div class="meta" style="text-align:center">Sin resultados</div>'; return; }
     grid.innerHTML = "";
-    
-    products.forEach(p=>{
-      if (!p.precioPaca && !p.precioMillar) return;
-      
-      const currentMode = priceMode[p.id] || 'paca';
-      const currentPrice = currentMode === 'paca' ? p.precioPaca : p.precioMillar;
-      const currentUnit = currentMode === 'paca' ? 'paca' : 'millar';
-      
-      const card = document.createElement("article");
-      card.className = "card";
-      card.innerHTML = `
-        <img class="thumb" src="${p.img || 'assets/placeholder.jpg'}" alt="${p.nombre}" onerror="this.src='assets/placeholder.jpg'">
+    items.forEach(p=>{
+      const mode = priceMode[p.id] || "paca";
+      const price = mode==="paca" ? (p.precioPaca||0) : (p.precioMillar||0);
+      const unit = mode==="paca" ? "paca" : "millar";
+      const el = document.createElement("article");
+      el.className = "card";
+      el.innerHTML = `
+        <img class="thumb" src="${p.img||'assets/placeholder.jpg'}" alt="${p.nombre}" onerror="this.src='assets/placeholder.jpg'">
         <div class="body">
           <h3 class="title">${p.nombre}</h3>
-          <div class="meta">${p.cm} cm (${p.inch} in) • ${p.material}${p.calibre && p.calibre !== "—"?" • Cal "+p.calibre:""}<br/>${p.color}</div>
-          
+          <div class="meta">${p.cm} cm (${p.inch} in) • ${p.material}${p.calibre? " • Cal "+p.calibre:""} • ${p.color||""}</div>
           <div class="price-toggle">
-            <button class="${currentMode==='paca'?'active':''}" onclick="togglePrice('${p.id}', 'paca')">Por Paca</button>
-            <button class="${currentMode==='millar'?'active':''}" onclick="togglePrice('${p.id}', 'millar')">Por Millar</button>
+            <button class="${mode==='paca'?'on':''}" onclick="togglePrice('${p.id}','paca')">Paca</button>
+            <button class="${mode==='millar'?'on':''}" onclick="togglePrice('${p.id}','millar')">Millar</button>
           </div>
-          
-          <div class="price-display">
-            <div class="price">${money(currentPrice)}</div>
-            <div class="price-unit">Por ${currentUnit}</div>
-          </div>
-          
-          <div class="row">
-            <span class="chip">${p.familia}</span>
-          </div>
-          
+          <div><span class="price">${money(price)}</span> <span class="unit">/ ${unit}</span></div>
+          <div class="row"><span class="chip">${p.familia||''}</span></div>
           <div class="actions">
-            <button class="btn" onclick="openModal('${p.id}')">👁️ Detalles</button>
-            <a class="btn primary" href="${waLink(`📦 ${p.id} — ${p.nombre} (${p.cm} cm) — Precio por ${currentUnit}: ${money(currentPrice)}`)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <button class="btn card" onclick="openModal('${p.id}')">Detalles</button>
+            <a class="btn cta" href="${waLink('Ref: '+p.id+' — '+p.nombre+' ('+p.cm+' cm) — Precio '+unit+': '+money(price))}" target="_blank" rel="noopener">WhatsApp</a>
           </div>
-        </div>
-      `;
-      grid.appendChild(card);
+        </div>`;
+      grid.appendChild(el);
     });
   }
 
-  // ====== TOGGLE PRICE ======
-  window.togglePrice = function(productId, mode) {
-    priceMode[productId] = mode;
-    const currentPageProducts = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
-    render(currentPageProducts);
-  };
-
-  // ====== PAGER ======
-  const pager = $("#pager");
-  function renderPager(total){
-    pager.innerHTML = "";
-    if(total<=1) return;
-    
-    const prev = document.createElement("button"); 
-    prev.innerHTML = "← Anterior"; 
-    prev.onclick=()=>{ if(page>1){ page--; paginate(filtered);} };
-    prev.disabled = page === 1;
-    
-    const next = document.createElement("button"); 
-    next.innerHTML = "Siguiente →"; 
-    next.onclick=()=>{ if(page<total){ page++; paginate(filtered);} };
-    next.disabled = page === total;
-    
-    pager.appendChild(prev);
-    
-    for(let i=1;i<=total;i++){
-      const b = document.createElement("button");
-      b.textContent = i; 
-      if(i===page) b.classList.add("on");
-      b.onclick = ()=>{ page=i; paginate(filtered); };
-      pager.appendChild(b);
-    }
-    
-    pager.appendChild(next);
+  function togglePrice(id, mode){
+    priceMode[id] = mode;
+    const slice = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+    render(slice);
   }
 
-  // ====== MODAL ======
-  const dlg = $("#dlg");
-  const modalBody = $("#modalBody");
+  function renderPager(total){
+    const pager = $("#pager"); pager.innerHTML = "";
+    if(total<=1) return;
+    const add = (t, fn, on=false)=>{const b=document.createElement("button"); b.textContent=t; if(on) b.classList.add("on"); b.onclick=fn; pager.appendChild(b);};
+    add("←", ()=>{if(page>1){page--; paginate(filtered);}});
+    for(let i=1;i<=total;i++) add(i, ()=>{page=i; paginate(filtered);}, i===page);
+    add("→", ()=>{if(page<total){page++; paginate(filtered);}});
+  }
+
   function openModal(id){
-    const p = PRODUCTS.find(x=>x.id===id); 
-    if(!p) return;
-    
-    // ====== MODAL ======
-  const dlg = $("#dlg");
-  const modalBody = $("#modalBody");
-  function openModal(id){
-    const p = PRODUCTS.find(x=>x.id===id); 
-    if(!p) return;
-    
-    const imgs = p.galeria && p.galeria.length ? p.galeria : [p.img || 'assets/placeholder.jpg'];
-    const main = imgs[0];
-    const currentMode = priceMode[p.id] || 'paca';
-    const currentPrice = currentMode === 'paca' ? p.precioPaca : p.precioMillar;
-    const currentUnit = currentMode === 'paca' ? 'paca' : 'millar';
-    
-    modalBody.innerHTML = `
+    const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+    const imgs = (p.galeria&&p.galeria.length)? p.galeria : [p.img||"assets/placeholder.jpg"];
+    const mode = priceMode[p.id] || "paca";
+    const price = mode==="paca" ? (p.precioPaca||0) : (p.precioMillar||0);
+    const unit = mode==="paca" ? "paca" : "millar";
+    $("#modalBody").innerHTML = `
       <div>
-        <img id="mainImg" src="${main}" alt="${p.nombre}" onerror="this.src='assets/placeholder.jpg'">
-        <div class="thumbs" id="thumbs"></div>
+        <img id="mainImg" src="${imgs[0]}" alt="${p.nombre}">
+        <div id="thumbs" class="thumbs"></div>
       </div>
       <div>
         <h3>${p.nombre}</h3>
-        <div class="modal-meta">${p.familia} • ${p.color}</div>
-        
-        <div class="kv">
-          <span class="kv-label">Medidas:</span>
-          <span class="kv-value">${p.cm} cm (${p.inch} in)</span>
+        <div class="kv"><b>Medidas:</b> ${p.cm} cm (${p.inch} in)</div>
+        <div class="kv"><b>Material:</b> ${p.material}${p.calibre? " • Cal "+p.calibre:""}</div>
+        <div class="kv"><b>Presentación:</b> ${p.unidad||"—"}</div>
+        <div class="kv"><b>Precio:</b> ${money(price)} / ${unit}</div>
+        <div class="kv"><b>Usos:</b> ${(Array.isArray(p.usos)?p.usos.join(", "):p.usos)||"—"}</div>
+        <div class="actions" style="margin-top:12px">
+          <a class="btn cta" href="${waLink('Ref: '+p.id+' — '+p.nombre+' ('+p.cm+' cm) — Precio '+unit+': '+money(price))}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          <button class="btn card" onclick="dlg.close()">Cerrar</button>
         </div>
-        <div class="kv">
-          <span class="kv-label">Material:</span>
-          <span class="kv-value">${p.material} ${p.calibre && p.calibre !== "—"?"• Cal "+p.calibre:""}</span>
-        </div>
-        <div class="kv">
-          <span class="kv-label">Presentación:</span>
-          <span class="kv-value">${p.unidad}</span>
-        </div>
-        
-        <div class="price-toggle" style="margin:16px 0">
-          <button class="${currentMode==='paca'?'active':''}" onclick="toggleModalPrice('${p.id}', 'paca')">Por Paca</button>
-          <button class="${currentMode==='millar'?'active':''}" onclick="toggleModalPrice('${p.id}', 'millar')">Por Millar</button>
-        </div>
-        
-        <div class="price-display" id="modalPrice-${p.id}">
-          <div class="price">${money(currentPrice)}</div>
-          <div class="price-unit">Por ${currentUnit}</div>
-        </div>
-        
-        <div class="kv">
-          <span class="kv-label">Usos típicos:</span>
-          <span class="kv-value">${Array.isArray(p.usos) ? p.usos.join(", ") : (p.usos || "Uso general")}</span>
-        </div>
-        
-        <div class="actions" style="margin-top:20px; gap:12px">
-          <a class="btn primary" href="${waLink(`📦 ${p.id} — ${p.nombre} (${p.cm} cm) — Precio por ${currentUnit}: ${money(currentPrice)}`)}" target="_blank" rel="noopener" style="flex:2">Cotizar por WhatsApp</a>
-          <button class="btn" onclick="dlg.close()" style="flex:1">Cerrar</button>
-        </div>
-      </div>
-    `;
-    
-    const thumbs = $("#thumbs");
-    const mainImg = $("#mainImg");
-    imgs.forEach((src,idx)=>{
-      const t = document.createElement('img');
-      t.src = src; 
-      t.onerror = () => t.src = 'assets/placeholder.jpg';
-      if(idx===0) t.classList.add('active');
-      t.onclick = ()=>{ 
-        $(".thumbs img").forEach(x=>x.classList.remove('active')); 
-        t.classList.add('active'); 
-        mainImg.src = src; 
-      };
-      thumbs.appendChild(t);
-    });
+      </div>`;
+    const thumbs = $("#thumbs"), main = $("#mainImg");
+    imgs.forEach((src,i)=>{const t=document.createElement("img"); t.src=src; if(i===0) t.classList.add("on"); t.onclick=()=>{$$(".thumbs img").forEach(x=>x.classList.remove("on")); t.classList.add("on"); main.src=src;}; thumbs.appendChild(t);});
     dlg.showModal();
   }
-  window.openModal = openModal;
 
-  // ====== TOGGLE MODAL PRICE ======
-  window.toggleModalPrice = function(productId, mode) {
-    priceMode[productId] = mode;
-    const p = PRODUCTS.find(x => x.id === productId);
-    if(!p) return;
-    
-    const currentPrice = mode === 'paca' ? p.precioPaca : p.precioMillar;
-    const currentUnit = mode === 'paca' ? 'paca' : 'millar';
-    
-    // Update modal price display
-    const priceDisplay = $(`#modalPrice-${productId}`);
-    if(priceDisplay) {
-      priceDisplay.innerHTML = `
-        <div class="price">${money(currentPrice)}</div>
-        <div class="price-unit">Por ${currentUnit}</div>
-      `;
-    }
-    
-    // Update toggle buttons
-    const modalToggleButtons = $('.modal .price-toggle button');
-    modalToggleButtons.forEach(btn => {
-      if(btn.textContent.includes('Paca')) {
-        btn.className = mode === 'paca' ? 'active' : '';
-      } else if(btn.textContent.includes('Millar')) {
-        btn.className = mode === 'millar' ? 'active' : '';
-      }
-    });
-    
-    // Update WhatsApp link
-    const waBtn = $('.modal .btn.primary');
-    if(waBtn) {
-      waBtn.href = waLink(`📦 ${productId} — ${p.nombre} (${p.cm} cm) — Precio por ${currentUnit}: ${money(currentPrice)}`);
-    }
-  };
-
-  // ====== FILTERING ======
   function applyFilters(){
     const term = $("#q").value.trim().toLowerCase();
-    const fam = $("#familia").value; 
-    const col = $("#color").value; 
+    const fam = $("#familia").value;
+    const col = $("#color").value;
     const ord = $("#orden").value;
-    
-    grid.classList.add('loading');
-    
-    setTimeout(() => {
-      filtered = PRODUCTS.filter(p=>{
-        const searchString = `${p.nombre} ${p.familia} ${p.cm} ${p.inch} ${p.material} ${p.color} ${p.id}`.toLowerCase();
-        const hayTerm = !term || searchString.includes(term);
-        const hayFam = !fam || p.familia === fam; 
-        const hayCol = !col || p.color === col; 
-        return hayTerm && hayFam && hayCol;
-      });
-      
-      if(ord==="precioAsc") filtered.sort((a,b)=>(a.precioPaca||0)-(b.precioPaca||0));
-      if(ord==="precioDesc") filtered.sort((a,b)=>(b.precioPaca||0)-(a.precioPaca||0));
-      if(ord==="nombreAsc") filtered.sort((a,b)=>a.nombre.localeCompare(b.nombre,"es"));
-      
-      page = 1; 
-      paginate(filtered);
-      grid.classList.remove('loading');
-      showResultsCount();
-    }, 300);
+    filtered = PRODUCTS.filter(p=>{
+      const hayTerm = !term || (`${p.nombre} ${p.familia} ${p.cm} ${p.inch} ${p.material} ${p.color} ${p.id}`.toLowerCase().includes(term));
+      const hayFam = !fam || p.familia===fam;
+      const hayCol = !col || p.color===col;
+      return hayTerm && hayFam && hayCol;
+    });
+    if(ord==="precioAsc") filtered.sort((a,b)=>(a.precioPaca||0)-(b.precioPaca||0));
+    if(ord==="precioDesc") filtered.sort((a,b)=>(b.precioPaca||0)-(a.precioPaca||0));
+    if(ord==="nombreAsc") filtered.sort((a,b)=>a.nombre.localeCompare(b.nombre,"es"));
+    page = 1; paginate(filtered);
   }
 
   function clearFilters(){
-    $("#q").value = "";
-    $("#familia").value = "";
-    $("#color").value = "";
-    $("#orden").value = "";
-    filtered = [...PRODUCTS];
-    page = 1;
-    paginate(filtered);
-    showResultsCount();
+    $("#q").value = ""; $("#familia").value=""; $("#color").value=""; $("#orden").value="";
+    filtered = [...PRODUCTS]; page=1; paginate(filtered);
   }
 
-  function showResultsCount(){
-    const existing = $('.results-count');
-    if(existing) existing.remove();
-    
-    const count = document.createElement('div');
-    count.className = 'results-count';
-    count.innerHTML = `Mostrando ${filtered.length} producto${filtered.length !== 1 ? 's' : ''} ${filtered.length !== PRODUCTS.length ? `de ${PRODUCTS.length} total` : ''}`;
-    $('.filters-section').appendChild(count);
-  }
-
-  // ====== EVENT LISTENERS ======
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && dlg.open) {
-      dlg.close();
-    }
-    if(e.key === 'Enter' && document.activeElement.id === 'q') {
-      applyFilters();
-    }
-  });
-
-  // ====== UTILITY FUNCTIONS ======
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-
-  // ====== INIT ======
   (function init(){
-    console.log('Inicializando catálogo con Google Sheets...');
-    
-    document.title = "FUTUR GREEN — Catálogo Premium";
-    
-    // Format phone number display
-    const phoneDisplay = WHATSAPP_NUMBER.replace("57","").replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, "$1 $2 $3 $4");
-    $("#waText").textContent = phoneDisplay;
-    
-    // WhatsApp button
-    $("#waFloat").addEventListener("click", ()=> 
-      window.open(waLink("¡Hola! Me interesa conocer más sobre sus productos"),"_blank"));
-    
-    // Auto-apply filters on input change
-    $("#q").addEventListener("input", debounce(applyFilters, 500));
-    $("#familia").addEventListener("change", applyFilters);
-    $("#color").addEventListener("change", applyFilters);
-    $("#orden").addEventListener("change", applyFilters);
-    
-    // CARGAR PRODUCTOS AL INICIALIZAR
-    loadProductsFromSheets();
-    
-    // Add smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    console.log('Catálogo inicializado');
+    document.getElementById("waText").textContent = WHATSAPP_NUMBER.replace("57","");
+    $("#waFloat").addEventListener("click", ()=> window.open(waLink("Hola, me interesa su catálogo"),"_blank"));
+    loadProductsFromCSV();
   })();
-
-  // ====== AUTO-REFRESH CADA 10 MINUTOS ======
-  setInterval(() => {
-    console.log('Auto-actualizando productos...');
-    loadProductsFromSheets();
-  }, 10 * 60 * 1000);
-
-  // ====== ERROR HANDLING ======
-  window.addEventListener('error', (e) => {
-    console.error('Error en el catálogo:', e.error);
-    showError('Error técnico detectado. Los datos pueden estar desactualizados.');
-  });
 </script>
 </body>
 </html>
