@@ -278,6 +278,11 @@
       
       const data = await response.json();
       console.log('Datos recibidos:', data);
+
+      // Simple check to see if we received the error object from Apps Script
+      if (data && data.error) {
+        throw new Error(data.error);
+      }
       
       PRODUCTS = data.filter(product => product.id && product.nombre);
       filtered = [...PRODUCTS];
@@ -294,9 +299,9 @@
       
       return PRODUCTS;
       
-    } catch (error) {
+  _} catch (error) {
       console.error('Error cargando productos:', error);
-      showError('Error al cargar productos desde Google Sheets. Usando datos de respaldo.');
+      showError(`Error al cargar: ${error.message}. Usando datos de respaldo.`);
       showLoading(false);
       
       // Productos de respaldo
@@ -474,13 +479,6 @@
   }
 
   // ====== MODAL ======
-  const dlg = $("#dlg");
-  const modalBody = $("#modalBody");
-  function openModal(id){
-    const p = PRODUCTS.find(x=>x.id===id); 
-    if(!p) return;
-    
-    // ====== MODAL ======
   const dlg = $("#dlg");
   const modalBody = $("#modalBody");
   function openModal(id){
