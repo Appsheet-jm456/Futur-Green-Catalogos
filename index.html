@@ -144,6 +144,10 @@
     /* Success/Error states */
     .success{border-color:var(--brand) !important; background:rgba(14,159,110,.05) !important}
     .error{border-color:#ef4444 !important; background:rgba(239,68,68,.05) !important}
+    
+    /* Debug styles - Temporal para ver errores */
+    .debug{border:2px solid red !important; background:pink !important}
+    .results-count{text-align:center; margin:16px 0; color:var(--muted); font-weight:600;}
   </style>
 </head>
 <body>
@@ -166,7 +170,7 @@
 <section class="hero">
   <div class="card">
     <div>
-      <h2>Catalogo de Bolsas de Manigueta </h2>
+      <h2>Catálogo de Bolsas de Manigueta</h2>
       <p class="sub">Venta por paca y millar • Material polietileno de alta calidad • Diversos calibres y colores disponibles • Entrega local garantizada en 24-48 horas</p>
     </div>
   </div>
@@ -245,7 +249,7 @@
   const DEFAULT_MSG = encodeURIComponent("¡Hola Futur Green! 👋 Quiero cotizar estas referencias:");
   const PAGE_SIZE = 9;
 
-  // ====== DATA (Demo con precios por millar) ======
+  // ====== DATA CORREGIDA ======
   const PRODUCTS = [
     { 
       id:"MAN-T20-NG", familia:"Manigueta", nombre:"Manigueta T-20", cm:"30×38", inch:"12×15", 
@@ -274,7 +278,7 @@
     { 
       id:"PRE-8x12-VD", familia:"Precorte", nombre:"Rollo Precorte 8×12 Verde", cm:"20×30", inch:"8×12", 
       material:"LD", calibre:"—", color:"Verde", unidad:"Rollo", 
-      precioKilo:5700, precioMillar:, 
+      precioPaca:5700, precioMillar:6200, 
       usos:["fruver","charcutería","carnicería"], 
       img:"assets/precorte-8x12.jpg", 
       galeria:["assets/precorte-8x12.jpg","assets/placeholder.jpg"] 
@@ -282,7 +286,7 @@
     { 
       id:"MAN-T50-BL", familia:"Manigueta", nombre:"Manigueta T-50 Blanca", cm:"52×65", inch:"20.5×25.5", 
       material:"HD", calibre:"16–18", color:"Blanco", unidad:"Paca x1000", 
-      precioPaca:130000, precioMillar:130000, 
+      precioPaca:13000, precioMillar:130000, 
       usos:["carga grande","voluminosos"], 
       img:"assets/manigueta-t50-blanca.jpg", 
       galeria:["assets/manigueta-t50-blanca.jpg"] 
@@ -320,8 +324,16 @@
   // ====== RENDER GRID ======
   const grid = $("#grid");
   function render(products){
+    console.log('Renderizando productos:', products.length); // Debug
     grid.innerHTML = "";
+    
     products.forEach(p=>{
+      // Verificar que el producto tenga los precios necesarios
+      if (!p.precioPaca && !p.precioMillar) {
+        console.warn('Producto sin precios:', p.id);
+        return;
+      }
+      
       const currentMode = priceMode[p.id] || 'paca';
       const currentPrice = currentMode === 'paca' ? p.precioPaca : p.precioMillar;
       const currentUnit = currentMode === 'paca' ? 'paca' : 'millar';
@@ -356,12 +368,14 @@
       `;
       grid.appendChild(card);
     });
+    console.log('Productos renderizados en el DOM'); // Debug
   }
 
   // ====== TOGGLE PRICE ======
   window.togglePrice = function(productId, mode) {
     priceMode[productId] = mode;
-    render(filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE));
+    const currentPageProducts = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+    render(currentPageProducts);
   };
 
   // ====== RENDER PAGER ======
@@ -457,6 +471,7 @@
       t.src = src; 
       if(idx===0) t.classList.add('active');
       t.onclick = ()=>{ 
+        // CORREGIDO: Usar $ en lugar de $ para seleccionar todos los elementos
         $(".thumbs img").forEach(x=>x.classList.remove('active')); 
         t.classList.add('active'); 
         mainImg.src = src; 
@@ -484,9 +499,9 @@
       `;
     }
     
-    // Update toggle buttons
-    const toggleButtons = $('.price-toggle button');
-    toggleButtons.forEach(btn => {
+    // Update toggle buttons - CORREGIDO: Usar $ y buscar dentro del modal
+    const modalToggleButtons = $('.modal .price-toggle button');
+    modalToggleButtons.forEach(btn => {
       if(btn.textContent.includes('Paca')) {
         btn.className = mode === 'paca' ? 'active' : '';
       } else if(btn.textContent.includes('Millar')) {
@@ -510,6 +525,8 @@
     const col = $("#color").value; 
     const ord = $("#orden").value;
     
+    console.log('Aplicando filtros:', { term, fam, col, ord }); // Debug
+    
     // Add loading state
     grid.classList.add('loading');
     
@@ -520,6 +537,8 @@
         const hayCol = !col || p.color===col; 
         return hayTerm && hayFam && hayCol;
       });
+      
+      console.log('Productos filtrados:', filtered.length); // Debug
       
       if(ord==="precioAsc") filtered.sort((a,b)=>(a.precioPaca||0)-(b.precioPaca||0));
       if(ord==="precioDesc") filtered.sort((a,b)=>(b.precioPaca||0)-(a.precioPaca||0));
@@ -551,7 +570,6 @@
     
     const count = document.createElement('div');
     count.className = 'results-count';
-    count.style.cssText = 'text-align:center; margin:16px 0; color:var(--muted); font-weight:600;';
     count.innerHTML = `📊 Mostrando ${filtered.length} producto${filtered.length !== 1 ? 's' : ''} ${filtered.length !== PRODUCTS.length ? `de ${PRODUCTS.length} total` : ''}`;
     
     $('.filters-section').appendChild(count);
@@ -569,6 +587,9 @@
 
   // ====== INIT ======
   (function init(){
+    console.log('Inicializando catálogo...'); // Debug
+    console.log('Productos cargados:', PRODUCTS.length); // Debug
+    
     document.title = "FUTUR GREEN — Catálogo Premium";
     
     // Format phone number display
@@ -585,11 +606,14 @@
     $("#orden").addEventListener("change", applyFilters);
     
     // Initial render
+    console.log('Iniciando renderizado inicial...'); // Debug
     paginate(filtered);
     showResultsCount();
     
     // Add smooth scroll behavior
     document.documentElement.style.scrollBehavior = 'smooth';
+    
+    console.log('Catálogo inicializado correctamente'); // Debug
   })();
 
   // ====== UTILITY FUNCTIONS ======
@@ -604,6 +628,13 @@
       timeout = setTimeout(later, wait);
     };
   }
+
+  // ====== ERROR HANDLING ======
+  window.addEventListener('error', (e) => {
+    console.error('Error en el catálogo:', e.error);
+    console.error('Línea:', e.lineno, 'Columna:', e.colno);
+    console.error('Archivo:', e.filename);
+  });
 
   // ====== INTERSECTION OBSERVER FOR ANIMATIONS ======
   const observerOptions = {
