@@ -299,7 +299,7 @@
       
       return PRODUCTS;
       
-  _} catch (error) {
+    } catch (error) {
       console.error('Error cargando productos:', error);
       showError(`Error al cargar: ${error.message}. Usando datos de respaldo.`);
       showLoading(false);
@@ -332,7 +332,7 @@
   // ====== UI HELPERS ======
   function showLoading(show) {
     const grid = $("#grid");
-    const existing = $('.loading-message');
+    const existing = document.querySelector('.loading-message');
     
     if (show) {
       if (!existing) {
@@ -535,15 +535,15 @@
       </div>
     `;
     
-    const thumbs = $("#thumbs");
-    const mainImg = $("#mainImg");
+    const thumbs = document.querySelector("#thumbs");
+    const mainImg = document.querySelector("#mainImg");
     imgs.forEach((src,idx)=>{
       const t = document.createElement('img');
       t.src = src; 
       t.onerror = () => t.src = 'assets/placeholder.jpg';
       if(idx===0) t.classList.add('active');
       t.onclick = ()=>{ 
-        $(".thumbs img").forEach(x=>x.classList.remove('active')); 
+        document.querySelectorAll(".thumbs img").forEach(x=>x.classList.remove('active')); 
         t.classList.add('active'); 
         mainImg.src = src; 
       };
@@ -563,7 +563,7 @@
     const currentUnit = mode === 'paca' ? 'paca' : 'millar';
     
     // Update modal price display
-    const priceDisplay = $(`#modalPrice-${productId}`);
+    const priceDisplay = document.querySelector(`#modalPrice-${productId}`);
     if(priceDisplay) {
       priceDisplay.innerHTML = `
         <div class="price">${money(currentPrice)}</div>
@@ -572,7 +572,7 @@
     }
     
     // Update toggle buttons
-    const modalToggleButtons = $('.modal .price-toggle button');
+    const modalToggleButtons = document.querySelectorAll('.modal .price-toggle button');
     modalToggleButtons.forEach(btn => {
       if(btn.textContent.includes('Paca')) {
         btn.className = mode === 'paca' ? 'active' : '';
@@ -582,7 +582,7 @@
     });
     
     // Update WhatsApp link
-    const waBtn = $('.modal .btn.primary');
+    const waBtn = document.querySelector('.modal .btn.primary');
     if(waBtn) {
       waBtn.href = waLink(`📦 ${productId} — ${p.nombre} (${p.cm} cm) — Precio por ${currentUnit}: ${money(currentPrice)}`);
     }
@@ -629,13 +629,13 @@
   }
 
   function showResultsCount(){
-    const existing = $('.results-count');
+    const existing = document.querySelector('.results-count');
     if(existing) existing.remove();
     
     const count = document.createElement('div');
     count.className = 'results-count';
     count.innerHTML = `Mostrando ${filtered.length} producto${filtered.length !== 1 ? 's' : ''} ${filtered.length !== PRODUCTS.length ? `de ${PRODUCTS.length} total` : ''}`;
-    $('.filters-section').appendChild(count);
+    document.querySelector('.filters-section').appendChild(count);
   }
 
   // ====== EVENT LISTENERS ======
