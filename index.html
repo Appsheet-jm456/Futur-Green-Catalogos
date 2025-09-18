@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>FUTURPLAST — Catálogo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Bolsas de manigueta y rollos precorte. Entregas en Cali 24–48 h. Venta por paca/rollo." />
+  <meta property="og:title" content="FUTURPLAST — Catálogo" />
+  <meta property="og:description" content="Bolsas de manigueta y precorte. Entregas en Cali 24–48 h." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-catalogo.jpg" />
+  <meta name="theme-color" content="#0E9F6E" />
+  <link rel="icon" href="assets/favicon.png" />
+  <style>
+    :root{
+      --brand:#0E9F6E; --dark:#0e1b16; --muted:#6b7280; --bg:#f6f7f8; --card:#fff;
+      --radius:16px; --shadow:0 8px 24px rgba(0,0,0,.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:#111; background:var(--bg)}
+    header{position:sticky; top:0; z-index:50; background:#fff; box-shadow:var(--shadow)}
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; max-width:1100px; margin:0 auto}
+    .brand{display:flex; align-items:center; gap:10px; white-space:nowrap}
+    .logo{width:36px; height:36px; border-radius:10px; background:var(--brand); display:inline-block}
+    .brand h1{font-size:16px; margin:0}
+    .brand small{display:block; color:var(--muted); font-weight:500}
+    .hero{max-width:1100px; margin:18px auto 0; padding:0 18px 18px}
+    .hero .card{background:linear-gradient(180deg,#ffffff, #f9fbfa); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); display:grid; grid-template-columns:1.2fr .8fr; gap:18px}
+    @media (max-width:840px){.hero .card{grid-template-columns:1fr}}
+    .hero h2{margin:0; font-size:24px}
+    .sub{color:var(--muted); margin:8px 0 0}
+    .filters{max-width:1100px; margin:16px auto; padding:0 18px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:10px}
+    @media (max-width:900px){.filters{grid-template-columns:1fr 1fr 1fr}}
+    @media (max-width:600px){.filters{grid-template-columns:1fr 1fr}}
+    .filters input,.filters select{width:100%; padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fff; outline:none}
+    .filters .btn{background:var(--brand); color:#fff; border:none; cursor:pointer; border-radius:12px; font-weight:600}
+    .grid{max-width:1100px; margin:10px auto 16px; padding:0 18px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column}
+    .thumb{width:100%; aspect-ratio:1.4/1; object-fit:cover; background:#eef3f1}
+    .body{padding:14px 14px 12px}
+    .title{margin:0 0 6px; font-size:16px}
+    .meta{color:var(--muted); font-size:13px; margin-bottom:8px}
+    .price{font-weight:800; font-size:18px}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .chip{background:#eef7f4; color:var(--brand); font-size:12px; padding:4px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:6px; font-weight:600}
+    .actions{display:flex; gap:10px; margin-top:10px}
+    .btn{flex:1; padding:10px 12px; border-radius:12px; border:1px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:600}
+    .btn.primary{background:var(--brand); color:#fff; border-color:transparent}
+    .footer{text-align:center; color:var(--muted); padding:26px 12px 80px}
+    /* Modal */
+    dialog{width:min(820px,92vw); border:none; border-radius:18px; padding:0; box-shadow:var(--shadow)}
+    dialog::backdrop{background:rgba(0,0,0,.35)}
+    .modal{display:grid; grid-template-columns:1.1fr .9fr; gap:20px; padding:16px; position:relative}
+    @media (max-width:780px){ .modal{grid-template-columns:1fr} }
+    .modal img{width:100%; border-radius:14px; background:#eef3f1; aspect-ratio:1.1/1; object-fit:cover}
+    .modal h3{margin:.2rem 0 .1rem}
+    .muted{color:var(--muted)}
+    .kv{margin:.25rem 0}
+    .kv b{display:inline-block; min-width:140px}
+    .x{position:absolute; right:10px; top:8px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:6px 10px; cursor:pointer}
+    .thumbs{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
+    .thumbs img{width:64px; height:64px; object-fit:cover; border-radius:10px; border:2px solid transparent; cursor:pointer}
+    .thumbs img.active{border-color:var(--brand)}
+    /* Pagination */
+    .pager{max-width:1100px; margin:0 auto 40px; padding:0 18px; display:flex; justify-content:center; gap:8px}
+    .pager button{padding:8px 12px; border-radius:10px; border:1px solid #e5e7eb; background:#fff; cursor:pointer}
+    .pager .on{background:var(--brand); color:#fff; border-color:transparent}
+    /* Floating WhatsApp */
+    .wa{position:fixed; right:18px; bottom:18px; z-index:40; background:#25D366; color:#fff; border:none; border-radius:999px; padding:13px 16px; font-weight:800; box-shadow:var(--shadow); cursor:pointer}
+  </style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <span class="logo"></span>
+      <div>
+        <h1>FUTURPLAST</h1>
+        <small>Catálogo — El futuro es Circular</small>
+      </div>
+    </div>
+    <div class="brand">
+      <small>WhatsApp: (+57) <b id="waText">318 751 41 95</b> · Cali · Entregas 24–48 h</small>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="card">
+    <div>
+      <h2>Bolsas de manigueta y rollos precorte</h2>
+      <p class="sub">Venta por paca / rollo. Material HD/LD, calibres y colores. Entrega local 24–48 h.</p>
+    </div>
+    <div>
+      <form class="filters" id="filters" onsubmit="event.preventDefault(); applyFilters();">
+        <input type="search" id="q" placeholder="Buscar: T-30, 43x52, precorte 8x12, negro…" />
+        <select id="familia">
+          <option value="">Familia (todas)</option>
+          <option>Manigueta</option>
+          <option>Precorte</option>
+        </select>
+        <select id="color">
+          <option value="">Color (todos)</option>
+          <option>Negro</option>
+          <option>Blanco</option>
+          <option>Verde</option>
+          <option>Rayada Azul</option>
+        </select>
+        <select id="orden">
+          <option value="">Ordenar</option>
+          <option value="precioAsc">Precio ↑</option>
+          <option value="precioDesc">Precio ↓</option>
+          <option value="nombreAsc">Nombre A-Z</option>
+        </select>
+        <button class="btn btn filters-btn">Filtrar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+
+<dialog id="dlg">
+  <button class="x" onclick="dlg.close()">✕</button>
+  <div class="modal" id="modalBody"></div>
+</dialog>
+
+<button class="wa" id="waFloat">WhatsApp</button>
+
+<footer class="footer">
+  FUTURPLAST — Catálogo de bolsa maniguetas | El futuro es Circular<br/>
+  WhatsApp: (+57) <b>318-751-41-95</b> · Cali, Colombia · Entregas 24–48 h
+</footer>
+
+<script>
+  // ====== CONFIG ======
+  const WHATSAPP_NUMBER = "573187514195"; // Reemplaza por tu número en formato internacional
+  const DEFAULT_MSG = encodeURIComponent("Hola FuturPlast, quiero cotizar estas referencias:");
+  const PAGE_SIZE = 9; // productos por página
+
+  // ====== DATA (Demo) ======
+  const PRODUCTS = [
+    { id:"MAN-T20-NG", familia:"Manigueta", nombre:"Manigueta T-20", cm:"30×38", inch:"12×15", material:"HD", calibre:"12–14", color:"Negro", unidad:"Paca x1000", precioPaca:27000, precioUnidad:27, usos:["fruver pequeño","miscelánea","porciones"], img:"assets/manigueta-t20.jpg", galeria:["assets/manigueta-t20.jpg","assets/manigueta-t20-2.jpg","assets/placeholder.jpg"] },
+    { id:"MAN-T30-NG", familia:"Manigueta", nombre:"Manigueta T-30", cm:"43×52", inch:"17×20", material:"HD", calibre:"12–14", color:"Negro", unidad:"Paca x1000", precioPaca:55000, precioUnidad:55, usos:["minisúper","panadería","papelería"], img:"assets/manigueta-t30.jpg", galeria:["assets/manigueta-t30.jpg","assets/manigueta-t30-2.jpg"] },
+    { id:"MAN-T40-NG", familia:"Manigueta", nombre:"Manigueta T-40", cm:"48×60", inch:"19×24", material:"HD", calibre:"14–16", color:"Negro", unidad:"Paca x1000", precioPaca:95000, precioUnidad:95, usos:["ropa","domicilios medianos"], img:"assets/manigueta-t40.jpg", galeria:["assets/manigueta-t40.jpg"] },
+    { id:"PRE-8x12-VD", familia:"Precorte", nombre:"Rollo Precorte 8×12 Verde", cm:"20×30", inch:"8×12", material:"LD", calibre:"—", color:"Verde", unidad:"Rollo", precioPaca:0, precioUnidad:0, usos:["fruver","charcutería"], img:"assets/precorte-8x12.jpg", galeria:["assets/precorte-8x12.jpg","assets/placeholder.jpg"] },
+    { id:"MAN-T50-BL", familia:"Manigueta", nombre:"Manigueta T-50 Blanca", cm:"52×65", inch:"20.5×25.5", material:"HD", calibre:"16–18", color:"Blanco", unidad:"Paca x1000", precioPaca:130000, precioUnidad:130, usos:["carga grande","voluminosos"], img:"assets/manigueta-t50-blanca.jpg", galeria:["assets/manigueta-t50-blanca.jpg"] },
+    { id:"MAN-T20-RZ", familia:"Manigueta", nombre:"Manigueta T-20 Rayada Azul", cm:"35.8×16.5", inch:"14.1×6.5", material:"HD", calibre:"12–14", color:"Rayada Azul", unidad:"Paca x1000", precioPaca:31000, precioUnidad:31, usos:["tienda","panadería"], img:"assets/manigueta-t20-rayada.jpg", galeria:["assets/manigueta-t20-rayada.jpg","assets/placeholder.jpg"] },
+    // Agrega más productos aquí...
+  ];
+
+  // ====== UTIL ======
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const money = v => v ? v.toLocaleString("es-CO",{style:"currency", currency:"COP", maximumFractionDigits:0}) : "—";
+  const waLink = (text="") => `https://wa.me/${WHATSAPP_NUMBER}?text=${DEFAULT_MSG}%0A${encodeURIComponent(text)}`;
+
+  // ====== STATE ======
+  let filtered = [...PRODUCTS];
+  let page = 1;
+
+  function paginate(list){
+    const total = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+    if(page>total) page = total;
+    const start = (page-1)*PAGE_SIZE;
+    const slice = list.slice(start, start+PAGE_SIZE);
+    render(slice);
+    renderPager(total);
+  }
+
+  // ====== RENDER GRID ======
+  const grid = $("#grid");
+  function render(products){
+    grid.innerHTML = "";
+    products.forEach(p=>{
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <img class="thumb" src="${p.img || 'assets/placeholder.jpg'}" alt="${p.nombre}">
+        <div class="body">
+          <h3 class="title">${p.nombre}</h3>
+          <div class="meta">${p.cm} cm (${p.inch} in) · ${p.material}${p.calibre!=="—"?", cal "+p.calibre:""} · ${p.color}</div>
+          <div class="row">
+            <span class="price">${money(p.precioPaca)} <span class="muted" style="font-weight:600">/ paca</span></span>
+            <span class="chip">${p.familia}</span>
+          </div>
+          <div class="actions">
+            <button class="btn" data-id="${p.id}" onclick="openModal('${p.id}')">Detalles</button>
+            <a class="btn primary" href="${waLink(`Ref: ${p.id} — ${p.nombre} (${p.cm} cm)`)}" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ====== RENDER PAGER ======
+  const pager = $("#pager");
+  function renderPager(total){
+    pager.innerHTML = "";
+    if(total<=1) return;
+    const prev = document.createElement("button"); prev.textContent = "←"; prev.onclick=()=>{ if(page>1){ page--; paginate(filtered);} };
+    const next = document.createElement("button"); next.textContent = "→"; next.onclick=()=>{ if(page<total){ page++; paginate(filtered);} };
+    pager.appendChild(prev);
+    for(let i=1;i<=total;i++){
+      const b = document.createElement("button");
+      b.textContent = i; if(i===page) b.classList.add("on");
+      b.onclick = ()=>{ page=i; paginate(filtered); };
+      pager.appendChild(b);
+    }
+    pager.appendChild(next);
+  }
+
+  // ====== MODAL (con galería) ======
+  const dlg = $("#dlg");
+  const modalBody = $("#modalBody");
+  function openModal(id){
+    const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+    const imgs = p.galeria?.length ? p.galeria : [p.img || 'assets/placeholder.jpg'];
+    const main = imgs[0];
+    modalBody.innerHTML = `
+      <div>
+        <img id="mainImg" src="${main}" alt="${p.nombre}">
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <div>
+        <h3>${p.nombre}</h3>
+        <div class="muted">${p.familia} · ${p.color}</div>
+        <p class="kv"><b>Medidas:</b> ${p.cm} cm (${p.inch} in)</p>
+        <p class="kv"><b>Material / calibre:</b> ${p.material} ${p.calibre!=="—"?"· cal "+p.calibre:""}</p>
+        <p class="kv"><b>Unidad de venta:</b> ${p.unidad}</p>
+        <p class="kv"><b>Precio paca:</b> ${money(p.precioPaca)} &nbsp; <b>Precio unidad:</b> ${p.precioUnidad?money(p.precioUnidad):"—"}</p>
+        <p class="kv"><b>Usos típicos:</b> ${p.usos?.join(", ") || "—"}</p>
+        <div class="actions" style="margin-top:12px">
+          <a class="btn" href="${waLink(`Ref: ${p.id} — ${p.nombre} (${p.cm} cm)`)}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          <button class="btn primary" onclick="dlg.close()">Cerrar</button>
+        </div>
+      </div>
+    `;
+    const thumbs = $("#thumbs");
+    const mainImg = $("#mainImg");
+    imgs.forEach((src,idx)=>{
+      const t = document.createElement('img');
+      t.src = src; if(idx===0) t.classList.add('active');
+      t.onclick = ()=>{ $$(".thumbs img").forEach(x=>x.classList.remove('active')); t.classList.add('active'); mainImg.src = src; };
+      thumbs.appendChild(t);
+    });
+    dlg.showModal();
+  }
+  window.openModal = openModal;
+
+  // ====== FILTERING ======
+  function applyFilters(){
+    const term = $("#q").value.trim().toLowerCase();
+    const fam = $("#familia").value; const col = $("#color").value; const ord = $("#orden").value;
+    filtered = PRODUCTS.filter(p=>{
+      const hayTerm = !term || (p.nombre+" "+p.familia+" "+p.cm+" "+p.inch+" "+p.material+" "+p.color+" "+p.id).toLowerCase().includes(term);
+      const hayFam = !fam || p.familia===fam; const hayCol = !col || p.color===col; return hayTerm && hayFam && hayCol;
+    });
+    if(ord==="precioAsc") filtered.sort((a,b)=>(a.precioPaca||0)-(b.precioPaca||0));
+    if(ord==="precioDesc") filtered.sort((a,b)=>(b.precioPaca||0)-(a.precioPaca||0));
+    if(ord==="nombreAsc") filtered.sort((a,b)=>a.nombre.localeCompare(b.nombre,"es"));
+    page = 1; paginate(filtered);
+  }
+
+  // ====== INIT ======
+  (function init(){
+    document.title = "FUTURPLAST — Catálogo";
+    document.getElementById("waText").textContent = WHATSAPP_NUMBER.replace("57","").replace(/^3/,"3");
+    $("#waFloat").addEventListener("click", ()=> window.open(waLink(),"_blank"));
+    paginate(filtered);
+  })();
+</script>
+</body>
+</html>
