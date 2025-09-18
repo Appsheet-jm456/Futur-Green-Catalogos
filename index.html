@@ -56,11 +56,12 @@
     .filter-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
     .btn-filter{background:var(--gradient); color:#fff; border:none; cursor:pointer; border-radius:12px; font-weight:600; padding:12px 24px; font-size:14px; transition:all .2s ease; text-transform:uppercase; letter-spacing:.5px}
     .btn-filter:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .btn-filter:disabled{opacity:0.6; cursor:not-allowed; transform:none}
     .btn-clear{background:white; color:var(--muted); border:2px solid #e5e7eb; cursor:pointer; border-radius:12px; font-weight:600; padding:10px 20px; font-size:14px; transition:all .2s ease}
     .btn-clear:hover{border-color:var(--brand); color:var(--brand)}
 
     /* Grid mejorado */
-    .grid{max-width:1200px; margin:0 auto 32px; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:24px}
+    .grid{max-width:1200px; margin:0 auto 32px; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:24px; min-height:200px}
     
     /* Cards completamente rediseñadas */
     .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column; transition:all .3s ease; border:1px solid rgba(14,159,110,.05)}
@@ -124,6 +125,20 @@
     .wa{position:fixed; right:24px; bottom:24px; z-index:100; background:#25D366; color:#fff; border:none; border-radius:16px; padding:16px 20px; font-weight:700; box-shadow:var(--shadow-lg); cursor:pointer; transition:all .2s ease; display:flex; align-items:center; gap:8px; font-size:14px}
     .wa:hover{transform:translateY(-2px); box-shadow:0 12px 24px rgba(37,211,102,.3)}
     
+    /* Estados especiales */
+    .loading-message, .error-message{
+      text-align:center; padding:40px; border-radius:12px; margin:20px 0;
+    }
+    .loading-message{
+      color:var(--muted); font-size:18px; background:rgba(14,159,110,.05);
+    }
+    .error-message{
+      background:#fee; border:2px solid #fcc; color:#c33; font-weight:600;
+    }
+    .results-count{
+      text-align:center; margin:16px 0; color:var(--muted); font-weight:600;
+    }
+    
     /* Responsive improvements */
     @media (max-width:640px){
       .topbar{flex-direction:column; gap:12px; text-align:center}
@@ -140,14 +155,6 @@
     /* Animations */
     @keyframes fadeIn{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)}}
     .card{animation:fadeIn .3s ease-out}
-    
-    /* Success/Error states */
-    .success{border-color:var(--brand) !important; background:rgba(14,159,110,.05) !important}
-    .error{border-color:#ef4444 !important; background:rgba(239,68,68,.05) !important}
-    
-    /* Debug styles - Temporal para ver errores */
-    .debug{border:2px solid red !important; background:pink !important}
-    .results-count{text-align:center; margin:16px 0; color:var(--muted); font-weight:600;}
   </style>
 </head>
 <body>
@@ -162,7 +169,7 @@
     </div>
     <div class="contact-info">
       <div>WhatsApp: (+57) <b id="waText">318 751 41 95</b></div>
-      <div>📍 Cali • 🚚 Entregas 24-48h</div>
+      <div>Cali • Entregas 24-48h</div>
     </div>
   </div>
 </header>
@@ -171,7 +178,7 @@
   <div class="card">
     <div>
       <h2>Catálogo de Bolsas de Manigueta</h2>
-      <p class="sub">Venta por paca y millar • Material polietileno de alta calidad • Diversos calibres y colores disponibles • Entrega local garantizada en 24-48 horas</p>
+      <p class="sub">Venta por paca y millar • Material polietileno de alta calidad • Diversos calibres y colores disponibles • Entrega local garantizada en 24-48 horas • Datos actualizados desde Google Sheets</p>
     </div>
   </div>
 </section>
@@ -179,7 +186,7 @@
 <section class="filters-section">
   <div class="filters-card">
     <div class="filters-header">
-      <h3>🔍 Encuentra tu Producto Ideal</h3>
+      <h3>Encuentra tu Producto Ideal</h3>
       <p>Utiliza los filtros para encontrar exactamente lo que necesitas</p>
     </div>
     
@@ -192,34 +199,29 @@
         <label class="filter-label">Familia</label>
         <select id="familia">
           <option value="">Todas las familias</option>
-          <option>Manigueta</option>
-          <option>Precorte</option>
         </select>
       </div>
       <div class="filter-group">
         <label class="filter-label">Color</label>
         <select id="color">
           <option value="">Todos los colores</option>
-          <option>Negro</option>
-          <option>Blanco</option>
-          <option>Verde</option>
-          <option>Rayada Azul</option>
         </select>
       </div>
       <div class="filter-group">
         <label class="filter-label">Ordenar</label>
         <select id="orden">
           <option value="">Orden original</option>
-          <option value="precioAsc">💰 Precio menor</option>
-          <option value="precioDesc">💰 Precio mayor</option>
-          <option value="nombreAsc">📝 Nombre A-Z</option>
+          <option value="precioAsc">Precio menor</option>
+          <option value="precioDesc">Precio mayor</option>
+          <option value="nombreAsc">Nombre A-Z</option>
         </select>
       </div>
     </form>
     
     <div class="filter-actions">
-      <button class="btn-filter" onclick="applyFilters()">🔍 Aplicar Filtros</button>
-      <button class="btn-clear" onclick="clearFilters()">🗑️ Limpiar</button>
+      <button class="btn-filter" onclick="applyFilters()">Aplicar Filtros</button>
+      <button class="btn-clear" onclick="clearFilters()">Limpiar</button>
+      <button class="btn-filter" id="refreshBtn" onclick="refreshProducts()">Actualizar Datos</button>
     </div>
   </div>
 </section>
@@ -232,13 +234,13 @@
   <div class="modal" id="modalBody"></div>
 </dialog>
 
-<button class="wa" id="waFloat">💬 WhatsApp</button>
+<button class="wa" id="waFloat">WhatsApp</button>
 
 <footer class="footer">
   <div class="footer-content">
     <strong>COMERCILIZADORA FUTUR GREEN</strong><br/>
-    🌱 El futuro es Circular • 📱 WhatsApp: (+57) <b>318-751-41-95</b><br/>
-    📍 Cali, Valle del Cauca, Colombia • 🚚 Entregas 24-48 horas<br/>
+    El futuro es Circular • WhatsApp: (+57) <b>318-751-41-95</b><br/>
+    Cali, Valle del Cauca, Colombia • Entregas 24-48 horas<br/>
     <small style="margin-top:12px; display:block; opacity:.7">Catálogo de bolsas maniguetas • Calidad garantizada</small>
   </div>
 </footer>
@@ -246,60 +248,16 @@
 <script>
   // ====== CONFIG ======
   const WHATSAPP_NUMBER = "573187514195";
-  const DEFAULT_MSG = encodeURIComponent("¡Hola Futur Green! 👋 Quiero cotizar estas referencias:");
+  const DEFAULT_MSG = encodeURIComponent("¡Hola Futur Green! Quiero cotizar estas referencias:");
   const PAGE_SIZE = 9;
+  // URL de tu Apps Script
+  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbyAp4gR2ryRdBwJklYsG6DJz_twJUPs_JThssImApArgt_CoNG0rEZ_KONDhQ45RSOY2A/exec";
 
-  // ====== DATA CORREGIDA ======
-  const PRODUCTS = [
-    { 
-      id:"MAN-T20-NG", familia:"Manigueta", nombre:"Manigueta T-20", cm:"30×38", inch:"12×15", 
-      material:"HD", calibre:"12–14", color:"Negro", unidad:"Paca x1000", 
-      precioPaca:3000, precioMillar:30000, 
-      usos:["fruver pequeño","miscelánea","porciones"], 
-      img:"assets/manigueta-t20.jpg", 
-      galeria:["assets/manigueta-t20.jpg","assets/manigueta-t20-2.jpg","assets/placeholder.jpg"] 
-    },
-    { 
-      id:"MAN-T30-NG", familia:"Manigueta", nombre:"Manigueta T-30", cm:"43×52", inch:"17×20", 
-      material:"HD", calibre:"12–14", color:"Negro", unidad:"Paca x1000", 
-      precioPaca:55000, precioMillar:61000, 
-      usos:["minisúper","panadería","papelería"], 
-      img:"assets/manigueta-t30.jpg", 
-      galeria:["assets/manigueta-t30.jpg","assets/manigueta-t30-2.jpg"] 
-    },
-    { 
-      id:"MAN-T40-NG", familia:"Manigueta", nombre:"Manigueta T-40", cm:"48×60", inch:"19×24", 
-      material:"HD", calibre:"14–16", color:"Negro", unidad:"Paca x1000", 
-      precioPaca:8500, precioMillar:85000, 
-      usos:["ropa","domicilios medianos"], 
-      img:"assets/manigueta-t40.jpg", 
-      galeria:["assets/manigueta-t40.jpg"] 
-    },
-    { 
-      id:"PRE-8x12-VD", familia:"Precorte", nombre:"Rollo Precorte 8×12 Verde", cm:"20×30", inch:"8×12", 
-      material:"LD", calibre:"—", color:"Verde", unidad:"Rollo", 
-      precioPaca:5700, precioMillar:6200, 
-      usos:["fruver","charcutería","carnicería"], 
-      img:"assets/precorte-8x12.jpg", 
-      galeria:["assets/precorte-8x12.jpg","assets/placeholder.jpg"] 
-    },
-    { 
-      id:"MAN-T50-BL", familia:"Manigueta", nombre:"Manigueta T-50 Blanca", cm:"52×65", inch:"20.5×25.5", 
-      material:"HD", calibre:"16–18", color:"Blanco", unidad:"Paca x1000", 
-      precioPaca:13000, precioMillar:130000, 
-      usos:["carga grande","voluminosos"], 
-      img:"assets/manigueta-t50-blanca.jpg", 
-      galeria:["assets/manigueta-t50-blanca.jpg"] 
-    },
-    { 
-      id:"MAN-T20-RZ", familia:"Manigueta", nombre:"Manigueta T-20 Rayada Azul", cm:"35.8×16.5", inch:"14.1×6.5", 
-      material:"HD", calibre:"12–14", color:"Rayada Azul", unidad:"Paca x1000", 
-      precioPaca:3000, precioMillar:30000, 
-      usos:["tienda","panadería"], 
-      img:"assets/manigueta-t20-rayada.jpg", 
-      galeria:["assets/manigueta-t20-rayada.jpg","assets/placeholder.jpg"] 
-    },
-  ];
+  // ====== VARIABLES GLOBALES ======
+  let PRODUCTS = [];
+  let filtered = [];
+  let page = 1;
+  let priceMode = {};
 
   // ====== UTIL ======
   const $ = sel => document.querySelector(sel);
@@ -307,11 +265,121 @@
   const money = v => v ? v.toLocaleString("es-CO",{style:"currency", currency:"COP", maximumFractionDigits:0}) : "—";
   const waLink = (text="") => `https://wa.me/${WHATSAPP_NUMBER}?text=${DEFAULT_MSG}%0A${encodeURIComponent(text)}`;
 
-  // ====== STATE ======
-  let filtered = [...PRODUCTS];
-  let page = 1;
-  let priceMode = {}; // Para guardar el modo de precio por producto
+  // ====== CARGAR PRODUCTOS DESDE GOOGLE SHEETS ======
+  async function loadProductsFromSheets() {
+    try {
+      console.log('Cargando productos desde Google Sheets...');
+      showLoading(true);
+      
+      const response = await fetch(SHEETS_API_URL);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('Datos recibidos:', data);
+      
+      PRODUCTS = data.filter(product => product.id && product.nombre);
+      filtered = [...PRODUCTS];
+      
+      console.log('Productos cargados:', PRODUCTS.length);
+      
+      // Actualizar filtros dinámicos
+      updateFilterOptions();
+      
+      // Renderizar después de cargar
+      paginate(filtered);
+      showResultsCount();
+      showLoading(false);
+      
+      return PRODUCTS;
+      
+    } catch (error) {
+      console.error('Error cargando productos:', error);
+      showError('Error al cargar productos desde Google Sheets. Usando datos de respaldo.');
+      showLoading(false);
+      
+      // Productos de respaldo
+      PRODUCTS = getBackupProducts();
+      filtered = [...PRODUCTS];
+      updateFilterOptions();
+      paginate(filtered);
+      showResultsCount();
+      
+      return PRODUCTS;
+    }
+  }
 
+  // ====== PRODUCTOS DE RESPALDO ======
+  function getBackupProducts() {
+    return [
+      { 
+        id:"MAN-T20-NG", familia:"Manigueta", nombre:"Manigueta T-20", cm:"30×38", inch:"12×15", 
+        material:"HD", calibre:"12–14", color:"Negro", unidad:"Paca x1000", 
+        precioPaca:3000, precioMillar:30000, 
+        usos:["fruver pequeño","miscelánea","porciones"], 
+        img:"assets/placeholder.jpg", 
+        galeria:["assets/placeholder.jpg"] 
+      }
+    ];
+  }
+
+  // ====== UI HELPERS ======
+  function showLoading(show) {
+    const grid = $("#grid");
+    const existing = $('.loading-message');
+    
+    if (show) {
+      if (!existing) {
+        grid.innerHTML = '<div class="loading-message">⏳ Cargando productos desde Google Sheets...</div>';
+      }
+    } else {
+      if (existing) existing.remove();
+    }
+  }
+
+  function showError(message) {
+    const grid = $("#grid");
+    const error = document.createElement('div');
+    error.className = 'error-message';
+    error.innerHTML = `❌ ${message}`;
+    grid.appendChild(error);
+    
+    setTimeout(() => error.remove(), 8000);
+  }
+
+  function updateFilterOptions() {
+    // Actualizar opciones de familia
+    const familiaSelect = $("#familia");
+    const familias = [...new Set(PRODUCTS.map(p => p.familia))].filter(f => f);
+    familiaSelect.innerHTML = '<option value="">Todas las familias</option>';
+    familias.forEach(familia => {
+      familiaSelect.innerHTML += `<option value="${familia}">${familia}</option>`;
+    });
+
+    // Actualizar opciones de color
+    const colorSelect = $("#color");
+    const colores = [...new Set(PRODUCTS.map(p => p.color))].filter(c => c);
+    colorSelect.innerHTML = '<option value="">Todos los colores</option>';
+    colores.forEach(color => {
+      colorSelect.innerHTML += `<option value="${color}">${color}</option>`;
+    });
+  }
+
+  // ====== REFRESH MANUAL ======
+  async function refreshProducts() {
+    const btn = $("#refreshBtn");
+    btn.disabled = true;
+    btn.textContent = "🔄 Actualizando...";
+    
+    await loadProductsFromSheets();
+    
+    btn.disabled = false;
+    btn.textContent = "🔄 Actualizar Datos";
+  }
+  window.refreshProducts = refreshProducts;
+
+  // ====== RENDER FUNCTIONS ======
   function paginate(list){
     const total = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
     if(page>total) page = total;
@@ -321,18 +389,17 @@
     renderPager(total);
   }
 
-  // ====== RENDER GRID ======
   const grid = $("#grid");
   function render(products){
-    console.log('Renderizando productos:', products.length); // Debug
+    if (products.length === 0) {
+      grid.innerHTML = '<div class="loading-message">📭 No se encontraron productos con los filtros seleccionados</div>';
+      return;
+    }
+
     grid.innerHTML = "";
     
     products.forEach(p=>{
-      // Verificar que el producto tenga los precios necesarios
-      if (!p.precioPaca && !p.precioMillar) {
-        console.warn('Producto sin precios:', p.id);
-        return;
-      }
+      if (!p.precioPaca && !p.precioMillar) return;
       
       const currentMode = priceMode[p.id] || 'paca';
       const currentPrice = currentMode === 'paca' ? p.precioPaca : p.precioMillar;
@@ -341,10 +408,10 @@
       const card = document.createElement("article");
       card.className = "card";
       card.innerHTML = `
-        <img class="thumb" src="${p.img || 'assets/placeholder.jpg'}" alt="${p.nombre}">
+        <img class="thumb" src="${p.img || 'assets/placeholder.jpg'}" alt="${p.nombre}" onerror="this.src='assets/placeholder.jpg'">
         <div class="body">
           <h3 class="title">${p.nombre}</h3>
-          <div class="meta">📏 ${p.cm} cm (${p.inch} in) • ${p.material}${p.calibre!=="—"?" • Cal "+p.calibre:""}<br/>🎨 ${p.color}</div>
+          <div class="meta">${p.cm} cm (${p.inch} in) • ${p.material}${p.calibre && p.calibre !== "—"?" • Cal "+p.calibre:""}<br/>${p.color}</div>
           
           <div class="price-toggle">
             <button class="${currentMode==='paca'?'active':''}" onclick="togglePrice('${p.id}', 'paca')">Por Paca</button>
@@ -368,7 +435,6 @@
       `;
       grid.appendChild(card);
     });
-    console.log('Productos renderizados en el DOM'); // Debug
   }
 
   // ====== TOGGLE PRICE ======
@@ -378,7 +444,7 @@
     render(currentPageProducts);
   };
 
-  // ====== RENDER PAGER ======
+  // ====== PAGER ======
   const pager = $("#pager");
   function renderPager(total){
     pager.innerHTML = "";
@@ -407,14 +473,21 @@
     pager.appendChild(next);
   }
 
-  // ====== MODAL (con galería mejorada) ======
+  // ====== MODAL ======
   const dlg = $("#dlg");
   const modalBody = $("#modalBody");
   function openModal(id){
     const p = PRODUCTS.find(x=>x.id===id); 
     if(!p) return;
     
-    const imgs = p.galeria?.length ? p.galeria : [p.img || 'assets/placeholder.jpg'];
+    // ====== MODAL ======
+  const dlg = $("#dlg");
+  const modalBody = $("#modalBody");
+  function openModal(id){
+    const p = PRODUCTS.find(x=>x.id===id); 
+    if(!p) return;
+    
+    const imgs = p.galeria && p.galeria.length ? p.galeria : [p.img || 'assets/placeholder.jpg'];
     const main = imgs[0];
     const currentMode = priceMode[p.id] || 'paca';
     const currentPrice = currentMode === 'paca' ? p.precioPaca : p.precioMillar;
@@ -422,7 +495,7 @@
     
     modalBody.innerHTML = `
       <div>
-        <img id="mainImg" src="${main}" alt="${p.nombre}">
+        <img id="mainImg" src="${main}" alt="${p.nombre}" onerror="this.src='assets/placeholder.jpg'">
         <div class="thumbs" id="thumbs"></div>
       </div>
       <div>
@@ -430,15 +503,15 @@
         <div class="modal-meta">${p.familia} • ${p.color}</div>
         
         <div class="kv">
-          <span class="kv-label">📏 Medidas:</span>
+          <span class="kv-label">Medidas:</span>
           <span class="kv-value">${p.cm} cm (${p.inch} in)</span>
         </div>
         <div class="kv">
-          <span class="kv-label">🧪 Material:</span>
-          <span class="kv-value">${p.material} ${p.calibre!=="—"?"• Cal "+p.calibre:""}</span>
+          <span class="kv-label">Material:</span>
+          <span class="kv-value">${p.material} ${p.calibre && p.calibre !== "—"?"• Cal "+p.calibre:""}</span>
         </div>
         <div class="kv">
-          <span class="kv-label">📦 Presentación:</span>
+          <span class="kv-label">Presentación:</span>
           <span class="kv-value">${p.unidad}</span>
         </div>
         
@@ -453,12 +526,12 @@
         </div>
         
         <div class="kv">
-          <span class="kv-label">💼 Usos típicos:</span>
-          <span class="kv-value">${p.usos?.join(", ") || "Uso general"}</span>
+          <span class="kv-label">Usos típicos:</span>
+          <span class="kv-value">${Array.isArray(p.usos) ? p.usos.join(", ") : (p.usos || "Uso general")}</span>
         </div>
         
         <div class="actions" style="margin-top:20px; gap:12px">
-          <a class="btn primary" href="${waLink(`📦 ${p.id} — ${p.nombre} (${p.cm} cm) — Precio por ${currentUnit}: ${money(currentPrice)}`)}" target="_blank" rel="noopener" style="flex:2">💬 Cotizar por WhatsApp</a>
+          <a class="btn primary" href="${waLink(`📦 ${p.id} — ${p.nombre} (${p.cm} cm) — Precio por ${currentUnit}: ${money(currentPrice)}`)}" target="_blank" rel="noopener" style="flex:2">Cotizar por WhatsApp</a>
           <button class="btn" onclick="dlg.close()" style="flex:1">Cerrar</button>
         </div>
       </div>
@@ -469,9 +542,9 @@
     imgs.forEach((src,idx)=>{
       const t = document.createElement('img');
       t.src = src; 
+      t.onerror = () => t.src = 'assets/placeholder.jpg';
       if(idx===0) t.classList.add('active');
       t.onclick = ()=>{ 
-        // CORREGIDO: Usar $ en lugar de $ para seleccionar todos los elementos
         $(".thumbs img").forEach(x=>x.classList.remove('active')); 
         t.classList.add('active'); 
         mainImg.src = src; 
@@ -480,6 +553,7 @@
     });
     dlg.showModal();
   }
+  window.openModal = openModal;
 
   // ====== TOGGLE MODAL PRICE ======
   window.toggleModalPrice = function(productId, mode) {
@@ -499,7 +573,7 @@
       `;
     }
     
-    // Update toggle buttons - CORREGIDO: Usar $ y buscar dentro del modal
+    // Update toggle buttons
     const modalToggleButtons = $('.modal .price-toggle button');
     modalToggleButtons.forEach(btn => {
       if(btn.textContent.includes('Paca')) {
@@ -516,8 +590,6 @@
     }
   };
 
-  window.openModal = openModal;
-
   // ====== FILTERING ======
   function applyFilters(){
     const term = $("#q").value.trim().toLowerCase();
@@ -525,20 +597,16 @@
     const col = $("#color").value; 
     const ord = $("#orden").value;
     
-    console.log('Aplicando filtros:', { term, fam, col, ord }); // Debug
-    
-    // Add loading state
     grid.classList.add('loading');
     
     setTimeout(() => {
       filtered = PRODUCTS.filter(p=>{
-        const hayTerm = !term || (p.nombre+" "+p.familia+" "+p.cm+" "+p.inch+" "+p.material+" "+p.color+" "+p.id).toLowerCase().includes(term);
-        const hayFam = !fam || p.familia===fam; 
-        const hayCol = !col || p.color===col; 
+        const searchString = `${p.nombre} ${p.familia} ${p.cm} ${p.inch} ${p.material} ${p.color} ${p.id}`.toLowerCase();
+        const hayTerm = !term || searchString.includes(term);
+        const hayFam = !fam || p.familia === fam; 
+        const hayCol = !col || p.color === col; 
         return hayTerm && hayFam && hayCol;
       });
-      
-      console.log('Productos filtrados:', filtered.length); // Debug
       
       if(ord==="precioAsc") filtered.sort((a,b)=>(a.precioPaca||0)-(b.precioPaca||0));
       if(ord==="precioDesc") filtered.sort((a,b)=>(b.precioPaca||0)-(a.precioPaca||0));
@@ -547,8 +615,6 @@
       page = 1; 
       paginate(filtered);
       grid.classList.remove('loading');
-      
-      // Show results count
       showResultsCount();
     }, 300);
   }
@@ -570,12 +636,11 @@
     
     const count = document.createElement('div');
     count.className = 'results-count';
-    count.innerHTML = `📊 Mostrando ${filtered.length} producto${filtered.length !== 1 ? 's' : ''} ${filtered.length !== PRODUCTS.length ? `de ${PRODUCTS.length} total` : ''}`;
-    
+    count.innerHTML = `Mostrando ${filtered.length} producto${filtered.length !== 1 ? 's' : ''} ${filtered.length !== PRODUCTS.length ? `de ${PRODUCTS.length} total` : ''}`;
     $('.filters-section').appendChild(count);
   }
 
-  // ====== KEYBOARD SHORTCUTS ======
+  // ====== EVENT LISTENERS ======
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && dlg.open) {
       dlg.close();
@@ -584,37 +649,6 @@
       applyFilters();
     }
   });
-
-  // ====== INIT ======
-  (function init(){
-    console.log('Inicializando catálogo...'); // Debug
-    console.log('Productos cargados:', PRODUCTS.length); // Debug
-    
-    document.title = "FUTUR GREEN — Catálogo Premium";
-    
-    // Format phone number display
-    const phoneDisplay = WHATSAPP_NUMBER.replace("57","").replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, "$1 $2 $3 $4");
-    $("#waText").textContent = phoneDisplay;
-    
-    // WhatsApp button
-    $("#waFloat").addEventListener("click", ()=> window.open(waLink("¡Hola! 👋 Me interesa conocer más sobre sus productos"),"_blank"));
-    
-    // Auto-apply filters on input change
-    $("#q").addEventListener("input", debounce(applyFilters, 500));
-    $("#familia").addEventListener("change", applyFilters);
-    $("#color").addEventListener("change", applyFilters);
-    $("#orden").addEventListener("change", applyFilters);
-    
-    // Initial render
-    console.log('Iniciando renderizado inicial...'); // Debug
-    paginate(filtered);
-    showResultsCount();
-    
-    // Add smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    console.log('Catálogo inicializado correctamente'); // Debug
-  })();
 
   // ====== UTILITY FUNCTIONS ======
   function debounce(func, wait) {
@@ -629,46 +663,46 @@
     };
   }
 
+  // ====== INIT ======
+  (function init(){
+    console.log('Inicializando catálogo con Google Sheets...');
+    
+    document.title = "FUTUR GREEN — Catálogo Premium";
+    
+    // Format phone number display
+    const phoneDisplay = WHATSAPP_NUMBER.replace("57","").replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, "$1 $2 $3 $4");
+    $("#waText").textContent = phoneDisplay;
+    
+    // WhatsApp button
+    $("#waFloat").addEventListener("click", ()=> 
+      window.open(waLink("¡Hola! Me interesa conocer más sobre sus productos"),"_blank"));
+    
+    // Auto-apply filters on input change
+    $("#q").addEventListener("input", debounce(applyFilters, 500));
+    $("#familia").addEventListener("change", applyFilters);
+    $("#color").addEventListener("change", applyFilters);
+    $("#orden").addEventListener("change", applyFilters);
+    
+    // CARGAR PRODUCTOS AL INICIALIZAR
+    loadProductsFromSheets();
+    
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    console.log('Catálogo inicializado');
+  })();
+
+  // ====== AUTO-REFRESH CADA 10 MINUTOS ======
+  setInterval(() => {
+    console.log('Auto-actualizando productos...');
+    loadProductsFromSheets();
+  }, 10 * 60 * 1000);
+
   // ====== ERROR HANDLING ======
   window.addEventListener('error', (e) => {
     console.error('Error en el catálogo:', e.error);
-    console.error('Línea:', e.lineno, 'Columna:', e.colno);
-    console.error('Archivo:', e.filename);
+    showError('Error técnico detectado. Los datos pueden estar desactualizados.');
   });
-
-  // ====== INTERSECTION OBSERVER FOR ANIMATIONS ======
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, observerOptions);
-
-  // Observe cards for animation
-  const observeNewCards = () => {
-    const cards = $('.card:not(.observed)');
-    cards.forEach(card => {
-      card.classList.add('observed');
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
-    });
-  };
-
-  // Call after each render
-  const originalRender = render;
-  render = function(...args) {
-    originalRender.apply(this, args);
-    setTimeout(observeNewCards, 100);
-  };
 </script>
 </body>
 </html>
